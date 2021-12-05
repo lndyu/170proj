@@ -22,10 +22,10 @@ def solve(tasks,constant = 1.2):
         total_profit += profit(task,time)
         completed.add(task)
         time -= task.get_duration()
+    resulting_sequence.pop()
     final_result = []
     for i in range(len(resulting_sequence)):
         final_result.append(resulting_sequence[len(resulting_sequence)-i-1])
-    print(time)
     return final_result
 
 #this is our heuristic. What is the approximate penalty if we don
@@ -49,9 +49,10 @@ def profit(task,current_time):
 #         output = solve(tasks)
 #         write_output_file(output_path, output)
 
+size = 'large'
+
 for i in range(1,301):
     if(i != 0):
-        print(i)
-        tasks_list = read_input_file('project-fa21-skeleton/inputs/medium/medium-' + str(i) + '.in')
-        result = solve(tasks_list)
-        write_output_file('project-fa21-skeleton/outputs/medium/medium-' + str(i) + '.out',result)
+        tasks_list = read_input_file('inputs/' + size + '/' + size + '-' + str(i) + '.in')
+        result = solve(tasks_list,1.4)
+        write_output_file('outputs/' + size + '/' + size + '-' + str(i) + '.out',result)
