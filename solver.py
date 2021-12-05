@@ -10,12 +10,24 @@ def solve(tasks):
     """
     #current state of the search
     time = 0
+    total_profit = 0
+    completed = set()
     while(time<1440):
-        heuristic_tasks = [(heuristic(task),task) for task in tasks]
-        heuristic_tasks.sort(key=lambda x:x[0],reverse = True)
+        heuristic_tasks = [(heuristic(task,time),task) for task in tasks if task not in completed]
+        selected = max(heuristic_tasks,key=lambda x:x[0])
+        total_profit += profit(selected,time)
+        completed.add(selected)
+        time += selected.get_duration()
+    return(total_profit)
 
 #this is our heuristic. What is the approximate penalty if we don
 def heuristic(task,current_time):
+    return profit(task,current_time)/task.get_duration()
+
+#this is the profit if we select task at this time
+def profit(task,current_time):
+    overdue = current_time + task.get_duration() - task.deadline()
+    return task.get_late_benefit(overdue)
 
 
     
