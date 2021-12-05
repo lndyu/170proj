@@ -1,14 +1,19 @@
 from parse import read_input_file, write_output_file
 import os
 
-def solve(tasks):
+overall_best = 0
+
+def solve(tasks,current_profit = 0):
     """
     Args:
         tasks: list[Task], list of igloos to polish
     Returns:
         output: list of igloos in order of polishing  
     """
-    pass
+    #select the igloo
+    #create new list of tasks with modifications
+    #recursively call on new list
+    
 
 
 # Here's an example of how to run your solver.
