@@ -1,18 +1,23 @@
 from parse import read_input_file, write_output_file
 import os
 
-overall_best = 0
-
-def solve(tasks,current_profit = 0):
+def solve(tasks):
     """
     Args:
         tasks: list[Task], list of igloos to polish
     Returns:
         output: list of igloos in order of polishing  
     """
-    #select the igloo
-    #create new list of tasks with modifications
-    #recursively call on new list
+    #current state of the search
+    time = 0
+    while(time<1440):
+        heuristic_tasks = [(heuristic(task),task) for task in tasks]
+        heuristic_tasks.sort(key=lambda x:x[0],reverse = True)
+
+#this is our heuristic. What is the approximate penalty if we don
+def heuristic(task,current_time):
+
+
     
 
 
