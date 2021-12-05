@@ -1,7 +1,7 @@
 from parse import read_input_file, write_output_file
 import os
 
-def solve(tasks,constant = 1.2):
+def solve(tasks):
     """
     Args:
         tasks: list[Task], list of igloos to polish
@@ -10,18 +10,25 @@ def solve(tasks,constant = 1.2):
     """
     #current state of the search
     total_tasks = len(tasks)
-    time = 1440
-    total_profit = 0
-    completed = set()
     resulting_sequence = []
-    while(time>0 and len(completed) != total_tasks):
-        heuristic_tasks = [(heuristic(task,time,constant),task) for task in tasks if task not in completed]
-        selected = max(heuristic_tasks,key=lambda x:x[0])
-        task = selected[1]
-        resulting_sequence.append(task.get_task_id())
-        total_profit += profit(task,time)
-        completed.add(task)
-        time -= task.get_duration()
+    total_profit = 0
+    constant_range = [0.01 * x for x in range(1, 201)]
+    for constant in constant_range:
+        time = 1440
+        completed = set()
+        temp_sequence = []
+        temp_profit = 0
+        while(time>0 and len(completed) != total_tasks):
+            heuristic_tasks = [(heuristic(task,time,constant),task) for task in tasks if task not in completed]
+            selected = max(heuristic_tasks,key=lambda x:x[0])
+            task = selected[1]
+            temp_sequence.append(task.get_task_id())
+            temp_profit += profit(task,time)
+            completed.add(task)
+            time -= task.get_duration()
+        if temp_profit > total_profit: 
+            resulting_sequence = temp_sequence
+            total_profit = temp_profit
     resulting_sequence.pop()
     final_result = []
     for i in range(len(resulting_sequence)):
@@ -49,10 +56,11 @@ def profit(task,current_time):
 #         output = solve(tasks)
 #         write_output_file(output_path, output)
 
-size = 'large'
+size = 'small'
 
 for i in range(1,301):
-    if(i != 0):
+    if(i != 184):
+        print(i)
         tasks_list = read_input_file('inputs/' + size + '/' + size + '-' + str(i) + '.in')
-        result = solve(tasks_list,1.4)
+        result = solve(tasks_list)
         write_output_file('outputs/' + size + '/' + size + '-' + str(i) + '.out',result)
