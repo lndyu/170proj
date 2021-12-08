@@ -18,7 +18,14 @@ def determine_profit(size,number):
 total_profit = 0
 for i in range(1,301):
     if(i != 184):
-        profit = determine_profit("large",i)[0]
+        profit = determine_profit("small",i)[0]
         total_profit += profit
+        print(i)
+        print(profit)
 
 print(total_profit/299)
+"""
+profit = determine_profit("small",1)[0]
+print(profit)
+"""
+
