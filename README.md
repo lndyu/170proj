@@ -1,6 +1,7 @@
 # CS 170 Project Fall 2021
 
-Take a look at the project spec before you get started!
+Project Description:
+You are given a list of tasks that you have the option to complete. Each task has a profit value and a deadline. After the deadline, the profit of the task will begin to decrement with an exponential function. You are only given a certain amount of time to complete as many of these tasks as you can. Our goal is to come up with an algorithm that will determine a sequence that will maximize the total profit.
 
 Requirements:
 
